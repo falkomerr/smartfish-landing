@@ -6,7 +6,7 @@ import { cn } from '@/shared/lib/utils';
 import { type IconProps } from '@/shared/ui/Icon';
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none cursor-pointer disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center whitespace-nowrap font-medium transition-all disabled:pointer-events-none cursor-pointer disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -22,12 +22,12 @@ const buttonVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
-        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
-        sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
-        lg: 'h-12.5 px-4 py-3 gap-2 rounded-full',
-        icon: 'size-9',
-        'icon-sm': 'size-8',
-        'icon-lg': 'size-10',
+        default: 'rounded-md',
+        sm: 'rounded-md',
+        lg: 'rounded-full',
+        icon: '',
+        'icon-sm': '',
+        'icon-lg': '',
       },
     },
     defaultVariants: {
@@ -36,6 +36,59 @@ const buttonVariants = cva(
     },
   },
 );
+
+const getButtonSizeStyles = (size?: 'default' | 'sm' | 'lg' | 'icon' | 'icon-sm' | 'icon-lg' | null) => {
+  switch (size) {
+    case 'sm':
+      return {
+        height: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+        paddingLeft: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+        paddingRight: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+        paddingTop: 'clamp(0.313vw, 0.417vw, 1.042vw)',
+        paddingBottom: 'clamp(0.313vw, 0.417vw, 1.042vw)',
+        gap: 'clamp(0.234vw, 0.313vw, 0.781vw)',
+        borderRadius: 'clamp(0.234vw, 0.313vw, 0.781vw)',
+        fontSize: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+      };
+    case 'lg':
+      return {
+        height: 'clamp(1.953vw, 2.604vw, 6.51vw)',
+        paddingLeft: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+        paddingRight: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+        paddingTop: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+        paddingBottom: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+        gap: 'clamp(0.313vw, 0.417vw, 1.042vw)',
+        borderRadius: '9999px',
+        fontSize: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+      };
+    case 'icon':
+      return {
+        width: 'clamp(1.406vw, 1.875vw, 4.688vw)',
+        height: 'clamp(1.406vw, 1.875vw, 4.688vw)',
+      };
+    case 'icon-sm':
+      return {
+        width: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+        height: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+      };
+    case 'icon-lg':
+      return {
+        width: 'clamp(1.563vw, 2.083vw, 5.208vw)',
+        height: 'clamp(1.563vw, 2.083vw, 5.208vw)',
+      };
+    default:
+      return {
+        height: 'clamp(1.406vw, 1.875vw, 4.688vw)',
+        paddingLeft: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+        paddingRight: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+        paddingTop: 'clamp(0.313vw, 0.417vw, 1.042vw)',
+        paddingBottom: 'clamp(0.313vw, 0.417vw, 1.042vw)',
+        gap: 'clamp(0.313vw, 0.417vw, 1.042vw)',
+        borderRadius: 'clamp(0.234vw, 0.313vw, 0.781vw)',
+        fontSize: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+      };
+  }
+};
 
 export interface ButtonProps
   extends React.ComponentProps<'button'>, VariantProps<typeof buttonVariants> {
@@ -64,11 +117,13 @@ function Button({
 
   // Determine icon size based on button size
   const iconSize = size === 'sm' ? 'sm' : size === 'lg' ? 'lg' : 'default';
+  const sizeStyles = getButtonSizeStyles(size);
 
   return (
     <Comp
       data-slot='button'
       className={cn(buttonVariants({ variant, size, className }))}
+      style={sizeStyles}
       {...props}
     >
       {leftIcon && (

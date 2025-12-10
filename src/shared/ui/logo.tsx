@@ -1,4 +1,10 @@
-export const Logo = ({ className }: { className: string }) => {
+export const Logo = ({
+  className,
+  style,
+}: {
+  className?: string;
+  style?: React.CSSProperties;
+}) => {
   return (
     <svg
       className={className}
@@ -7,6 +13,7 @@ export const Logo = ({ className }: { className: string }) => {
       viewBox="0 0 50 50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      style={style}
     >
       <g clipPath="url(#clip0_232_1212)">
         <mask

@@ -123,19 +123,30 @@
 
 @layer components {
   .text-default {
-    @apply font-inter text-[12px] leading-none font-[400];
+    @apply font-inter font-[400];
+    font-size: clamp(0.469vw, 0.625vw, 1.563vw);
+    line-height: 1;
   }
   .text-heading {
-    @apply font-inter text-[100px] leading-[75px] font-semibold tracking-[-1px];
+    @apply font-inter font-semibold;
+    font-size: clamp(3.906vw, 5.208vw, 13.021vw);
+    line-height: clamp(2.93vw, 3.906vw, 9.766vw);
+    letter-spacing: clamp(-0.039vw, -0.052vw, -0.13vw);
   }
   .text-product-name {
-    @apply font-inter align-middle text-[16px] leading-[20px] font-semibold tracking-normal;
+    @apply font-inter align-middle font-semibold tracking-normal;
+    font-size: clamp(0.625vw, 0.833vw, 2.083vw);
+    line-height: clamp(0.781vw, 1.042vw, 2.604vw);
   }
   .text-price-discount {
-    @apply font-inter align-middle text-[24px] leading-[28px] font-semibold tracking-normal;
+    @apply font-inter align-middle font-semibold tracking-normal;
+    font-size: clamp(0.938vw, 1.25vw, 3.125vw);
+    line-height: clamp(1.094vw, 1.458vw, 3.646vw);
   }
   .text-price-original {
-    @apply font-inter align-middle text-[14px] leading-[20px] font-normal tracking-normal;
+    @apply font-inter align-middle font-normal tracking-normal;
+    font-size: clamp(0.547vw, 0.729vw, 1.823vw);
+    line-height: clamp(0.781vw, 1.042vw, 2.604vw);
     color: #7d7d7d;
   }
 }

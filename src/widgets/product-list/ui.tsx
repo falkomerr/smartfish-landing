@@ -9,9 +9,10 @@ export interface ProductListProps {
   products: ProductCardProps[];
   itemsPerPage?: number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export function ProductList({ products, itemsPerPage = 1, className }: ProductListProps) {
+export function ProductList({ products, itemsPerPage = 1, className, style }: ProductListProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
@@ -20,7 +21,13 @@ export function ProductList({ products, itemsPerPage = 1, className }: ProductLi
   const currentProducts = products.slice(startIndex, endIndex);
 
   return (
-    <div className={cn('flex flex-col gap-6', className)}>
+    <div
+      className={cn('flex flex-col', className)}
+      style={{
+        gap: 'clamp(0.938vw, 1.25vw, 3.125vw)',
+        ...style,
+      }}
+    >
       {/* Product Card */}
       {currentProducts.map((product, index) => (
         <ProductCard

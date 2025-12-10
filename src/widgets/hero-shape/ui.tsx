@@ -139,11 +139,12 @@ export const HeroShape = ({
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
         xmlnsXlink='http://www.w3.org/1999/xlink'
-        className='absolute top-0 -mt-20'
+        className='absolute top-0'
         style={{
-          width: 'clamp(600px, 80vw, 1200px)',
+          width: 'clamp(46.875vw, 62.5vw, 100vw)',
           height: '250vh',
           right: '0',
+          marginTop: 'clamp(-3.125vw, -4.167vw, -10.417vw)',
         }}
         preserveAspectRatio='xMaxYMin meet'
       >
@@ -183,7 +184,7 @@ export const HeroShape = ({
         ref={containerRef}
         className='pointer-events-none absolute top-0 z-10 w-full'
         style={{
-          width: 'clamp(600px, 80vw, 1200px)',
+          width: 'clamp(46.875vw, 62.5vw, 100vw)',
           height: '250vh',
           right: '0',
         }}
@@ -202,10 +203,26 @@ export const HeroShape = ({
               variant='tertiary'
               size='lg'
               onClick={onButtonClick}
-              className='group size-80 rounded-full border-[3px] border-[#333B8F] bg-white/40 px-8 py-4 text-2xl font-medium text-[#333B8F] shadow shadow-lg backdrop-blur-md'
+              className='group rounded-full border-[#333B8F] bg-white/40 font-medium text-[#333B8F] shadow shadow-lg backdrop-blur-md'
+              style={{
+                width: 'clamp(12.5vw, 16.667vw, 41.667vw)',
+                height: 'clamp(12.5vw, 16.667vw, 41.667vw)',
+                paddingLeft: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+                paddingRight: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+                paddingTop: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+                paddingBottom: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+                fontSize: 'clamp(0.938vw, 1.25vw, 3.125vw)',
+                borderWidth: 'clamp(0.117vw, 0.156vw, 0.391vw)',
+              }}
             >
               {buttonText}
-              <MoveUpRight className='size-8 transition-all duration-400 group-hover:rotate-45' />
+              <MoveUpRight
+                className='transition-all duration-400 group-hover:rotate-45'
+                style={{
+                  width: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+                  height: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+                }}
+              />
             </Button>
           </div>
         </div>

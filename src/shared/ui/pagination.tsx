@@ -14,15 +14,30 @@ function Pagination({ currentPage, totalPages, onPageChange, className }: Pagina
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <div className={cn('flex items-center gap-2', className)}>
+    <div
+      className={cn('flex items-center', className)}
+      style={{
+        gap: 'clamp(0.313vw, 0.417vw, 1.042vw)',
+      }}
+    >
       <Button
         variant='ghost'
         size='icon'
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className='h-8 w-8 hover:bg-transparent'
+        className='hover:bg-transparent'
+        style={{
+          width: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+          height: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+        }}
       >
-        <ChevronLeft className='h-4 w-4 text-black' />
+        <ChevronLeft
+          className='text-black'
+          style={{
+            width: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+            height: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+          }}
+        />
         <span className='sr-only'>Предыдущая страница</span>
       </Button>
 
@@ -33,11 +48,17 @@ function Pagination({ currentPage, totalPages, onPageChange, className }: Pagina
           size='icon'
           onClick={() => onPageChange(page)}
           className={cn(
-            'font-inter h-8 w-8 align-middle text-[12px] leading-none font-normal tracking-normal',
+            'font-inter align-middle font-normal tracking-normal',
             currentPage === page
               ? '!bg-transparent !text-[#333B8F] hover:!text-[#333B8F]/90'
               : 'text-[#D6D8E9] hover:bg-transparent hover:text-[#D6D8E9]',
           )}
+          style={{
+            width: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+            height: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+            fontSize: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+            lineHeight: '1',
+          }}
         >
           {String(page).padStart(2, '0')}
         </Button>
@@ -48,9 +69,19 @@ function Pagination({ currentPage, totalPages, onPageChange, className }: Pagina
         size='icon'
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className='h-8 w-8 hover:bg-transparent'
+        className='hover:bg-transparent'
+        style={{
+          width: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+          height: 'clamp(1.25vw, 1.667vw, 4.167vw)',
+        }}
       >
-        <ChevronRight className='h-4 w-4 text-black' />
+        <ChevronRight
+          className='text-black'
+          style={{
+            width: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+            height: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+          }}
+        />
         <span className='sr-only'>Следующая страница</span>
       </Button>
     </div>

@@ -23,30 +23,68 @@ export function ProductCard({
   onAddToCart,
 }: ProductCardProps) {
   return (
-    <div className='relative flex w-75 flex-col overflow-hidden rounded-[24px] bg-[#F9F9FA] p-3'>
+    <div
+      className='relative flex flex-col overflow-hidden bg-[#F9F9FA]'
+      style={{
+        width: 'clamp(11.719vw, 15.625vw, 39.063vw)',
+        padding: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+        borderRadius: 'clamp(0.938vw, 1.25vw, 3.125vw)',
+      }}
+    >
       {/* Product Image with Discount Banner */}
-      <div className='mb-4'>
-        <div className='relative w-full overflow-hidden rounded-lg'>
+      <div
+        style={{
+          marginBottom: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+        }}
+      >
+        <div className='relative w-full overflow-hidden'>
           <Image
             src={image}
             alt={imageAlt}
-            className='aspect-[220/165] w-full rounded-[16px]'
+            className='w-full'
+            style={{
+              aspectRatio: '220/165',
+              borderRadius: 'clamp(0.313vw, 0.417vw, 1.042vw)',
+            }}
             width={220}
             height={165}
           />
         </div>
       </div>
       {discount && discount > 0 && (
-        <div className='absolute top-0 left-0 mt-4 -translate-x-7 -rotate-45 bg-[#FDE108] px-10 py-1'>
+        <div
+          className='absolute top-0 left-0 -rotate-45 bg-[#FDE108]'
+          style={{
+            marginTop: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+            transform: 'translateX(clamp(-1.094vw, -1.458vw, -3.646vw)) rotate(-45deg)',
+            paddingLeft: 'clamp(1.563vw, 2.083vw, 5.208vw)',
+            paddingRight: 'clamp(1.563vw, 2.083vw, 5.208vw)',
+            paddingTop: 'clamp(0.156vw, 0.208vw, 0.521vw)',
+            paddingBottom: 'clamp(0.156vw, 0.208vw, 0.521vw)',
+          }}
+        >
           <span className='text-product-name font-semibold text-[#000000]'>-{discount}%</span>
         </div>
       )}
 
       {/* Product Name */}
-      <h3 className='text-product-name text-foreground mb-3'>{name}</h3>
+      <h3
+        className='text-product-name text-foreground'
+        style={{
+          marginBottom: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+        }}
+      >
+        {name}
+      </h3>
 
       {/* Price Section */}
-      <div className='mb-4 flex items-end gap-2'>
+      <div
+        className='mb-4 flex items-end'
+        style={{
+          marginBottom: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+          gap: 'clamp(0.313vw, 0.417vw, 1.042vw)',
+        }}
+      >
         <span className='text-price-discount leading-none text-[#333B8F]'>{currentPrice} сом</span>
         {originalPrice && (
           <span className='text-price-original leading-[1.3] line-through'>
