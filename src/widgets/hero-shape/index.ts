@@ -1,0 +1,2 @@
+export { HeroShape } from './ui';
+
