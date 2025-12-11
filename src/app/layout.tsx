@@ -1,3 +1,4 @@
+import { cn } from "@/shared/utils";
 import { Header } from "@/widgets/header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -20,7 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
+      <body
+        className={cn(
+          inter.variable,
+          "antialiased",
+          "max-w-screen overflow-x-hidden"
+        )}
+      >
         <Header />
         {children}
       </body>

@@ -1,12 +1,12 @@
-import { cn } from "@/shared/lib/utils";
-import * as React from "react";
+import { cn } from '@/shared/utils';
+import * as React from 'react';
 
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /**
    * Size variant of the icon
    * @default "default"
    */
-  size?: "sm" | "default" | "lg";
+  size?: 'sm' | 'default' | 'lg';
   /**
    * SVG content as children (inline SVG elements)
    */
@@ -23,9 +23,9 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
 }
 
 const sizeMap = {
-  sm: "w-4 h-4",
-  default: "w-5 h-5",
-  lg: "w-6 h-6",
+  sm: 'w-4 h-4',
+  default: 'w-5 h-5',
+  lg: 'w-6 h-6',
 };
 
 /**
@@ -33,11 +33,11 @@ const sizeMap = {
  * Supports both inline SVG children and path-based SVG
  */
 export const Icon = ({
-  size = "default",
+  size = 'default',
   className,
   children,
   path,
-  viewBox = "0 0 24 24",
+  viewBox = '0 0 24 24',
   ...props
 }: IconProps) => {
   const sizeClasses = sizeMap[size];
@@ -48,8 +48,8 @@ export const Icon = ({
       <svg
         className={cn(sizeClasses, className)}
         viewBox={viewBox}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
         {...props}
       >
         {children}
@@ -63,11 +63,11 @@ export const Icon = ({
       <svg
         className={cn(sizeClasses, className)}
         viewBox={viewBox}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
         {...props}
       >
-        <path d={path} fill="currentColor" />
+        <path d={path} fill='currentColor' />
       </svg>
     );
   }

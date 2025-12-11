@@ -162,6 +162,20 @@
     line-height: clamp(2.93vw, 3.906vw, 9.766vw);
     letter-spacing: clamp(-0.039vw, -0.052vw, -0.13vw);
   }
+  .text-hero-title {
+    @apply font-inter font-semibold;
+    font-size: clamp(2.813vw, 3.75vw, 9.375vw);
+    line-height: clamp(3.125vw, 4.167vw, 10.417vw);
+    letter-spacing: clamp(-0.063vw, -0.083vw, -0.208vw);
+  }
+  .text-description {
+    @apply font-inter text-center align-middle font-normal;
+    font-size: 22px;
+    leading-trim: none;
+    line-height: 100%;
+    letter-spacing: 0px;
+    vertical-align: middle;
+  }
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;

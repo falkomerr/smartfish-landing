@@ -1,7 +1,7 @@
 'use client';
 
-import { cn } from '@/shared/lib/utils';
 import { Pagination } from '@/shared/ui/pagination';
+import { cn } from '@/shared/utils';
 import { ProductCard, type ProductCardProps } from '@/widgets/product-card';
 import { useState } from 'react';
 

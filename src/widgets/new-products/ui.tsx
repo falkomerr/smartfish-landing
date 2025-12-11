@@ -2,7 +2,7 @@
 
 import { Button } from '@/shared/ui/button';
 import { Container } from '@/shared/ui/container';
-import { ArrowLeftIcon, ArrowRightIcon } from '@/shared/ui/icons';
+import { ArrowRightIcon } from '@/shared/ui/icons';
 import { ProductCard, type ProductCardProps } from '@/widgets/product-card';
 import { ArrowUpRightIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -185,7 +185,8 @@ export function NewProducts({ products, onViewAll, className, style }: NewProduc
               boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
             }}
           >
-            <ArrowLeftIcon
+            <ArrowRightIcon
+              className='rotate-180'
               size='default'
               style={{
                 width: 'clamp(0.938vw, 1.25vw, 3.125vw)',
@@ -218,12 +219,12 @@ export function NewProducts({ products, onViewAll, className, style }: NewProduc
       </div>
 
       {/* View All Button */}
-      <div className='flex items-center justify-center gap-2'>
+      <div className='flex items-center justify-center'>
         <Button
           variant='primary'
           size='lg'
           onClick={onViewAll}
-          className='group font-inter relative !h-fit rounded-full !py-5'
+          className='group font-inter relative !h-fit rounded-full !py-3'
           style={{
             paddingLeft: 'clamp(0.8125vw, 1.0833vw, 2.7083vw)',
             paddingRight: 'clamp(3.5vw, 3.2vw, 4.1vw)',
@@ -239,14 +240,14 @@ export function NewProducts({ products, onViewAll, className, style }: NewProduc
           <div
             className='absolute top-1/2 -translate-y-1/2 rounded-full bg-white transition-all **:text-[#333B8F] group-hover:rotate-45'
             style={{
-              right: 'clamp(0.4875vw, 0.65vw, 1.625vw)',
+              right: 'clamp(0.15vw, 0.3vw, 1.3vw)',
               padding: 'clamp(0.325vw, 0.4333vw, 1.0833vw)',
             }}
           >
             <ArrowUpRightIcon
               style={{
-                width: 'clamp(1.2194vw, 1.625vw, 4.0625vw)',
-                height: 'clamp(1.2194vw, 1.625vw, 4.0625vw)',
+                width: 'clamp(1.016vw, 1.354vw, 3.385vw)',
+                height: 'clamp(1.016vw, 1.354vw, 3.385vw)',
               }}
             />
           </div>
