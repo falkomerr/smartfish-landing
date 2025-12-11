@@ -1,6 +1,8 @@
 'use client';
 
+import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
+import { CartHollowIcon } from '@/shared/ui/icons';
 import Image from 'next/image';
 
 export interface ProductCardProps {
@@ -9,7 +11,10 @@ export interface ProductCardProps {
   name: string;
   currentPrice: string;
   originalPrice?: string;
+  extended?: boolean;
   discount?: number;
+  description?: string;
+  weight?: string;
   onAddToCart?: () => void;
 }
 
@@ -19,12 +24,18 @@ export function ProductCard({
   name,
   currentPrice,
   originalPrice,
+  extended = false,
   discount,
+  description,
+  weight,
   onAddToCart,
 }: ProductCardProps) {
   return (
     <div
-      className='relative flex flex-col overflow-hidden bg-[#F9F9FA]'
+      className={cn(
+        'relative flex flex-col overflow-hidden bg-[#F9F9FA]',
+        extended && 'bg-[#F1F1F7] p-3',
+      )}
       style={{
         width: 'clamp(11.719vw, 15.625vw, 39.063vw)',
         padding: 'clamp(0.469vw, 0.625vw, 1.563vw)',
@@ -41,9 +52,8 @@ export function ProductCard({
           <Image
             src={image}
             alt={imageAlt}
-            className='w-full'
+            className={cn('aspect-[220/165] w-full', extended && 'aspect-[304/360] w-full')}
             style={{
-              aspectRatio: '220/165',
               borderRadius: 'clamp(0.313vw, 0.417vw, 1.042vw)',
             }}
             width={220}
@@ -63,19 +73,39 @@ export function ProductCard({
             paddingBottom: 'clamp(0.156vw, 0.208vw, 0.521vw)',
           }}
         >
-          <span className='text-product-name font-semibold text-[#000000]'>-{discount}%</span>
+          <span className='text-label font-semibold text-[#000000]'>-{discount}%</span>
         </div>
       )}
 
       {/* Product Name */}
-      <h3
-        className='text-product-name text-foreground'
+      <div
         style={{
           marginBottom: 'clamp(0.469vw, 0.625vw, 1.563vw)',
         }}
+        className='flex w-full flex-nowrap items-end justify-between gap-x-2'
       >
-        {name}
-      </h3>
+        <h3 className='text-label text-foreground overflow-hidden leading-none text-nowrap text-ellipsis'>
+          {name}
+        </h3>
+        {extended && weight && (
+          <span className='text-body-xs leading-none text-nowrap text-[#919194]'>{weight}</span>
+        )}
+      </div>
+
+      {description && (
+        <p
+          className='text-body-xs line-clamp-2 text-[#919194]'
+          style={{
+            marginBottom: 'clamp(0.469vw, 0.625vw, 1.563vw)',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }}
+        >
+          {description}
+        </p>
+      )}
 
       {/* Price Section */}
       <div
@@ -85,16 +115,31 @@ export function ProductCard({
           gap: 'clamp(0.313vw, 0.417vw, 1.042vw)',
         }}
       >
-        <span className='text-price-discount leading-none text-[#333B8F]'>{currentPrice} сом</span>
+        <span className='text-price leading-none text-[#333B8F]'>{currentPrice} сом</span>
         {originalPrice && (
-          <span className='text-price-original leading-[1.3] line-through'>
-            {originalPrice} сом
-          </span>
+          <span className='text-body-md leading-[1.3] line-through'>{originalPrice} сом</span>
         )}
       </div>
 
       {/* Add to Cart Button */}
-      <Button variant='primary' onClick={onAddToCart} className='w-full'>
+      <Button
+        leftIcon={extended ? <CartHollowIcon className='group-hover:**:fill-white' /> : undefined}
+        variant={extended ? 'tertiary' : 'primary'}
+        className={cn(
+          'group font-inter !h-fit w-full gap-x-2 !rounded-full !py-3 **:transition-all hover:bg-[#333B8F] hover:text-white',
+          extended && 'border-none',
+        )}
+        style={{
+          fontFamily: 'var(--font-inter)',
+          fontWeight: 400,
+          fontStyle: 'normal',
+          fontSize: 'clamp(0.625vw, 0.833vw, 2.083vw)',
+          lineHeight: '100%',
+          letterSpacing: '0px',
+          verticalAlign: 'middle',
+        }}
+        onClick={onAddToCart}
+      >
         В корзину
       </Button>
     </div>

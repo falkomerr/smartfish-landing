@@ -28,11 +28,11 @@ export const Header = () => {
           />
           <Button variant='secondary' size='lg'>
             <BurgerIcon />
-            <p className='text-default'>Меню</p>
+            <p className='text-body-sm'>Меню</p>
           </Button>
           <Input
             placeholder='Поиск в магазине'
-            className='text-default'
+            className='text-body-sm'
             style={{
               minWidth: 'clamp(19.531vw, 26.042vw, 65.104vw)',
             }}

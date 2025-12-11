@@ -2,6 +2,7 @@
 
 import { Container } from '@/shared/ui/container';
 import { HeroShape } from '@/widgets/hero-shape';
+import { NewProducts } from '@/widgets/new-products';
 import { ProductList } from '@/widgets/product-list';
 
 export default function Home() {
@@ -24,14 +25,16 @@ export default function Home() {
           paddingTop: 'clamp(12.5vw, 16.667vw, 41.667vw)',
         }}
       >
-        <p className='text-heading'>
+        <p className='text-title-lg'>
           Рыбные изделия <br />
-          <span className='text-heading text-[#333B8F] italic'> высокого качества</span> <br /> для
-          каждого дня
+          <span className='text-title-lg text-[#333B8F] italic'>
+            {' '}
+            высокого качества
+          </span> <br /> для каждого дня
         </p>
 
         <p
-          className='text-default'
+          className='text-body-sm'
           style={{
             maxWidth: 'clamp(25vw, 33.333vw, 80vw)',
             fontSize: 'clamp(0.625vw, 0.833vw, 2.083vw)',
@@ -46,33 +49,36 @@ export default function Home() {
           style={{
             marginTop: 'clamp(10.938vw, 14.583vw, 36.458vw)',
           }}
-          products={[
-            {
-              image: '/hero.png',
-              imageAlt: 'Слабосоленые куски форели',
-              name: 'Слабосоленые куски форели',
-              currentPrice: '100',
-              originalPrice: '100',
-              discount: 10,
-            },
-            {
-              image: '/hero.png',
-              imageAlt: 'Слабосоленые куски форели',
-              name: 'Слабосоленые куски форели',
-              currentPrice: '100',
-              originalPrice: '100',
-            },
-            {
-              image: '/hero.png',
-              imageAlt: 'Слабосоленые куски форели',
-              name: 'Слабосоленые куски форели',
-              currentPrice: '100',
-              originalPrice: '100',
-              discount: 10,
-            },
-          ]}
+          products={Array.from({ length: 5 }).map((_, index) => ({
+            image: '/hero.png',
+            imageAlt: 'Слабосоленые куски форели',
+            name: 'Слабосоленые куски форели',
+            currentPrice: '100',
+            originalPrice: '100',
+            description:
+              'Филе форели, полностью очищенное от костей и приправленное натуральными специями — солью и молотым чёрным перцем',
+          }))}
         />
       </Container>
+
+      <NewProducts
+        style={{
+          marginTop: 'clamp(10.938vw, 14.583vw, 36.458vw)',
+          paddingTop: 'clamp(3.125vw, 4.167vw, 10.417vw)',
+          paddingBottom: 'clamp(3.125vw, 4.167vw, 10.417vw)',
+        }}
+        products={Array.from({ length: 10 }).map((_, index) => ({
+          image: '/hero.png',
+          imageAlt: 'Слабосоленые куски форели',
+          name: 'Слабосоленые куски форели',
+          currentPrice: '100',
+          description:
+            'Филе форели, полностью очищенное от костей и приправленное натуральными специями — солью и молотым чёрным перцем',
+        }))}
+        onViewAll={() => {
+          console.log('Переход к просмотру всех новинок');
+        }}
+      />
     </main>
   );
 }

@@ -122,31 +122,51 @@
 }
 
 @layer components {
-  .text-default {
+  .text-body-xs {
+    @apply font-inter align-middle font-normal tracking-normal;
+    font-size: clamp(0.547vw, 0.729vw, 1.823vw);
+    line-height: 100%;
+    letter-spacing: 0px;
+  }
+  .text-body-sm {
     @apply font-inter font-[400];
     font-size: clamp(0.469vw, 0.625vw, 1.563vw);
     line-height: 1;
   }
-  .text-heading {
+  .text-body-md {
+    @apply font-inter align-middle font-normal tracking-normal;
+    font-size: clamp(0.547vw, 0.729vw, 1.823vw);
+    line-height: clamp(0.781vw, 1.042vw, 2.604vw);
+    color: #7d7d7d;
+  }
+
+  .text-label {
+    @apply font-inter align-middle font-semibold tracking-normal;
+    font-size: clamp(0.625vw, 0.833vw, 2.083vw);
+    line-height: clamp(0.781vw, 1.042vw, 2.604vw);
+  }
+
+  .text-price {
+    @apply font-inter align-middle font-semibold tracking-normal;
+    font-size: clamp(0.938vw, 1.25vw, 3.125vw);
+    line-height: clamp(1.094vw, 1.458vw, 3.646vw);
+  }
+
+  .text-title-sm {
+    @apply font-inter text-center leading-none font-semibold;
+    font-size: clamp(1.25vw, 1.667vw, 4.167vw);
+  }
+  .text-title-lg {
     @apply font-inter font-semibold;
     font-size: clamp(3.906vw, 5.208vw, 13.021vw);
     line-height: clamp(2.93vw, 3.906vw, 9.766vw);
     letter-spacing: clamp(-0.039vw, -0.052vw, -0.13vw);
   }
-  .text-product-name {
-    @apply font-inter align-middle font-semibold tracking-normal;
-    font-size: clamp(0.625vw, 0.833vw, 2.083vw);
-    line-height: clamp(0.781vw, 1.042vw, 2.604vw);
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-  .text-price-discount {
-    @apply font-inter align-middle font-semibold tracking-normal;
-    font-size: clamp(0.938vw, 1.25vw, 3.125vw);
-    line-height: clamp(1.094vw, 1.458vw, 3.646vw);
-  }
-  .text-price-original {
-    @apply font-inter align-middle font-normal tracking-normal;
-    font-size: clamp(0.547vw, 0.729vw, 1.823vw);
-    line-height: clamp(0.781vw, 1.042vw, 2.604vw);
-    color: #7d7d7d;
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
