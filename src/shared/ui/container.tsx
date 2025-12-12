@@ -1,16 +1,14 @@
+import { forwardRef } from 'react';
 import { cn } from '@/shared/utils';
 
-export const Container = ({
-  children,
-  className,
-  style,
-}: {
+export const Container = forwardRef<HTMLDivElement, {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
-}) => {
+}>(({ children, className, style }, ref) => {
   return (
     <div
+      ref={ref}
       className={cn('flex', className)}
       style={{
         gap: 'clamp(0.938vw, 1.25vw, 3.125vw)',
@@ -22,4 +20,6 @@ export const Container = ({
       {children}
     </div>
   );
-};
+});
+
+Container.displayName = 'Container';

@@ -19,3 +19,4 @@ export function ArrowUpRightIcon(props: ArrowUpRightIconProps) {
     </Icon>
   );
 }
+

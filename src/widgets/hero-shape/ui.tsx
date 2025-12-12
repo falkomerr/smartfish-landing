@@ -203,7 +203,7 @@ export const HeroShape = ({
               variant='tertiary'
               size='lg'
               onClick={onButtonClick}
-              className='group rounded-full border-[#333B8F] bg-white/40 font-medium text-[#333B8F] shadow shadow-lg backdrop-blur-md'
+              className='group animate-fade-in delay-200 button-hover rounded-full border-[#333B8F] bg-white/40 font-medium text-[#333B8F] shadow shadow-lg backdrop-blur-md'
               style={{
                 width: 'clamp(12.5vw, 16.667vw, 41.667vw)',
                 height: 'clamp(12.5vw, 16.667vw, 41.667vw)',

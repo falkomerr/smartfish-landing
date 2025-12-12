@@ -2,6 +2,7 @@
 
 import { Button } from "@/shared/ui/button";
 import { Container } from "@/shared/ui/container";
+import { useIntersectionObserver } from "@/shared/lib/useIntersectionObserver";
 import { cn } from "@/shared/utils";
 import { useId } from "react";
 
@@ -83,7 +84,7 @@ function CategoryCard({
   return (
     <div
       className={cn(
-        "group relative overflow-hidden cursor-pointer rounded-[clamp(1.5vw,2vw,5vw)] bg-[#F1F1F7] transition-all duration-300",
+        "group relative overflow-hidden cursor-pointer rounded-[clamp(1.5vw,2vw,5vw)] bg-[#F1F1F7] transition-all duration-300 card-hover",
         className
       )}
       style={style}
@@ -138,7 +139,7 @@ function CategoryCard({
             height={category.imageDimensions.height}
             preserveAspectRatio="xMidYMid slice"
             transform={category.imageTransform}
-            className="transition-transform  object-cover duration-300"
+            className="transition-transform object-cover duration-300 group-hover:scale-110"
           />
         </g>
       </svg>
@@ -174,10 +175,14 @@ export function Categories() {
   const maskId2 = useId();
   const maskId3 = useId();
   const maskId4 = useId();
+  const { elementRef, hasIntersected } = useIntersectionObserver({
+    triggerOnce: true,
+  });
 
   return (
     <Container
-      className="flex flex-col"
+      ref={elementRef}
+      className={`flex flex-col animate-on-scroll slide-up ${hasIntersected ? 'visible' : ''}`}
       style={{
         gap: "clamp(1.875vw, 2.5vw, 6.25vw)",
         paddingTop: "clamp(3.125vw, 4.167vw, 10.417vw)",
@@ -185,7 +190,7 @@ export function Categories() {
       }}
     >
       {/* Title */}
-      <h2 className="text-title-sm w-fit text-black">Категории</h2>
+      <h2 className="text-title-sm w-fit text-black animate-slide-in-left">Категории</h2>
 
       {/* Categories Grid */}
       <div

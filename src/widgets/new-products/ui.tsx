@@ -4,6 +4,7 @@ import { Button } from '@/shared/ui/button';
 import { Container } from '@/shared/ui/container';
 import { ArrowRightIcon } from '@/shared/ui/icons';
 import { ProductCard, type ProductCardProps } from '@/widgets/product-card';
+import { useIntersectionObserver } from '@/shared/lib/useIntersectionObserver';
 import { ArrowUpRightIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -20,6 +21,9 @@ export function NewProducts({ products, onViewAll, className, style }: NewProduc
   const [canScrollRight, setCanScrollRight] = useState(false);
   const rafIdRef = useRef<number | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const { elementRef, hasIntersected } = useIntersectionObserver({
+    triggerOnce: true,
+  });
 
   const checkScrollability = () => {
     if (!scrollContainerRef.current) return;
@@ -138,14 +142,15 @@ export function NewProducts({ products, onViewAll, className, style }: NewProduc
 
   return (
     <Container
-      className={`flex flex-col ${className || ''}`}
+      ref={elementRef}
+      className={`flex flex-col animate-on-scroll slide-up ${hasIntersected ? 'visible' : ''} ${className || ''}`}
       style={{
         gap: 'clamp(1.25vw, 1.667vw, 4.167vw)',
         ...style,
       }}
     >
       {/* Title */}
-      <h2 className='text-title-sm w-fit text-black'>Новинки товаров</h2>
+      <h2 className='text-title-sm w-fit text-black animate-slide-in-left'>Новинки товаров</h2>
 
       {/* Carousel Container */}
       <div className='relative -ml-10 flex w-screen items-center pl-10'>
@@ -159,6 +164,7 @@ export function NewProducts({ products, onViewAll, className, style }: NewProduc
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
             paddingRight: 'clamp(3.125vw, 4.167vw, 10.417vw)',
+            overflowY: 'hidden',
           }}
         >
           {products.map((product, index) => (
@@ -175,47 +181,43 @@ export function NewProducts({ products, onViewAll, className, style }: NewProduc
         </div>
 
         {/* Navigation Arrow Button Left */}
-        {canScrollLeft && (
-          <button
-            onClick={scrollLeft}
-            className='absolute left-4 z-10 flex items-center justify-center rounded-full bg-[#F1F1F7] transition-colors hover:bg-[#E5E5E5]'
+        <button
+          onClick={scrollLeft}
+          className={`absolute left-4 z-10 flex items-center justify-center rounded-full bg-[#F1F1F7] carousel-button button-hover ${canScrollLeft ? 'visible' : 'hidden'}`}
+          style={{
+            width: 'clamp(2.5vw, 3.333vw, 8.333vw)',
+            height: 'clamp(2.5vw, 3.333vw, 8.333vw)',
+            boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+          <ArrowRightIcon
+            className='rotate-180'
+            size='default'
             style={{
-              width: 'clamp(2.5vw, 3.333vw, 8.333vw)',
-              height: 'clamp(2.5vw, 3.333vw, 8.333vw)',
-              boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
+              width: 'clamp(0.938vw, 1.25vw, 3.125vw)',
+              height: 'clamp(0.938vw, 1.25vw, 3.125vw)',
             }}
-          >
-            <ArrowRightIcon
-              className='rotate-180'
-              size='default'
-              style={{
-                width: 'clamp(0.938vw, 1.25vw, 3.125vw)',
-                height: 'clamp(0.938vw, 1.25vw, 3.125vw)',
-              }}
-            />
-          </button>
-        )}
+          />
+        </button>
 
         {/* Navigation Arrow Button Right */}
-        {canScrollRight && (
-          <button
-            onClick={scrollRight}
-            className='absolute right-4 z-10 flex items-center justify-center rounded-full bg-[#F1F1F7] transition-colors hover:bg-[#E5E5E5]'
+        <button
+          onClick={scrollRight}
+          className={`absolute right-4 z-10 flex items-center justify-center rounded-full bg-[#F1F1F7] carousel-button button-hover ${canScrollRight ? 'visible' : 'hidden'}`}
+          style={{
+            width: 'clamp(2.5vw, 3.333vw, 8.333vw)',
+            height: 'clamp(2.5vw, 3.333vw, 8.333vw)',
+            boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+          <ArrowRightIcon
+            size='default'
             style={{
-              width: 'clamp(2.5vw, 3.333vw, 8.333vw)',
-              height: 'clamp(2.5vw, 3.333vw, 8.333vw)',
-              boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
+              width: 'clamp(0.938vw, 1.25vw, 3.125vw)',
+              height: 'clamp(0.938vw, 1.25vw, 3.125vw)',
             }}
-          >
-            <ArrowRightIcon
-              size='default'
-              style={{
-                width: 'clamp(0.938vw, 1.25vw, 3.125vw)',
-                height: 'clamp(0.938vw, 1.25vw, 3.125vw)',
-              }}
-            />
-          </button>
-        )}
+          />
+        </button>
       </div>
 
       {/* View All Button */}

@@ -48,10 +48,10 @@ function Pagination({ currentPage, totalPages, onPageChange, className }: Pagina
           size='icon'
           onClick={() => onPageChange(page)}
           className={cn(
-            'font-inter align-middle font-normal tracking-normal',
+            'font-inter align-middle font-normal tracking-normal transition-all duration-300',
             currentPage === page
-              ? '!bg-transparent !text-[#333B8F] hover:!text-[#333B8F]/90'
-              : 'text-[#D6D8E9] hover:bg-transparent hover:text-[#D6D8E9]',
+              ? '!bg-transparent !text-[#333B8F] hover:!text-[#333B8F]/90 scale-110'
+              : 'text-[#D6D8E9] hover:bg-transparent hover:text-[#D6D8E9] hover:scale-105',
           )}
           style={{
             width: 'clamp(1.25vw, 1.667vw, 4.167vw)',

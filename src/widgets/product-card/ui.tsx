@@ -1,5 +1,6 @@
 "use client";
 
+import { useIntersectionObserver } from "@/shared/lib/useIntersectionObserver";
 import { Button } from "@/shared/ui/button";
 import { CartHollowIcon, HeartIcon } from "@/shared/ui/icons";
 import { cn } from "@/shared/utils";
@@ -41,6 +42,9 @@ export function ProductCard({
 }: ProductCardProps) {
   const [favorite, setFavorite] = useState(isFavorite);
   const [inCart, setInCart] = useState(isInCart);
+  const { elementRef, hasIntersected } = useIntersectionObserver({
+    triggerOnce: true,
+  });
 
   const handleFavoriteClick = () => {
     setFavorite(!favorite);
@@ -54,10 +58,12 @@ export function ProductCard({
 
   return (
     <div
+      ref={elementRef}
       className={cn(
-        "relative flex flex-col overflow-hidden bg-[#F9F9FA]",
+        "relative flex flex-col overflow-hidden bg-[#F9F9FA] card-hover animate-on-scroll slide-up",
         extended && "bg-[#F1F1F7] p-3",
-        fillAvailableSpace && "!w-full"
+        fillAvailableSpace && "!w-full",
+        hasIntersected && "visible"
       )}
       style={{
         width: "clamp(11.719vw, 15.625vw, 39.063vw)",
@@ -73,7 +79,7 @@ export function ProductCard({
       >
         <div
           className={cn(
-            "relative w-full overflow-hidden",
+            "relative w-full overflow-hidden group",
             extended && "flex items-center justify-center"
           )}
           style={{
@@ -109,7 +115,7 @@ export function ProductCard({
           )}
           <div
             className={cn(
-              "relative",
+              "relative overflow-hidden",
               extended && "flex items-center justify-center",
               fillAvailableSpace && "!w-full !h-full"
             )}
@@ -122,11 +128,18 @@ export function ProductCard({
               src={image}
               alt={imageAlt}
               className={cn(
-                extended ? "object-contain" : "w-full h-full object-cover",
+                extended
+                  ? "object-contain"
+                  : "w-full h-full object-cover transition-transform duration-300 group-hover:scale-110",
                 fillAvailableSpace &&
                   "!w-full !h-full !rounded-[70px] object-cover"
               )}
               fill={extended}
+              sizes={
+                extended
+                  ? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  : undefined
+              }
               width={extended ? undefined : 220}
               height={extended ? undefined : 165}
               style={{

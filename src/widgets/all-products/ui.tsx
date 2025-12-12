@@ -3,6 +3,7 @@
 import { Button } from "@/shared/ui/button";
 import { Container } from "@/shared/ui/container";
 import { ProductCard, type ProductCardProps } from "@/widgets/product-card";
+import { useIntersectionObserver } from "@/shared/lib/useIntersectionObserver";
 import { ArrowUpRightIcon } from "lucide-react";
 
 export interface AllProductsProps {
@@ -18,16 +19,21 @@ export function AllProducts({
   className,
   style,
 }: AllProductsProps) {
+  const { elementRef, hasIntersected } = useIntersectionObserver({
+    triggerOnce: true,
+  });
+
   return (
     <Container
-      className={`flex flex-col ${className || ""}`}
+      ref={elementRef}
+      className={`flex flex-col animate-on-scroll slide-up ${hasIntersected ? 'visible' : ''} ${className || ""}`}
       style={{
         gap: "clamp(1.25vw, 1.667vw, 4.167vw)",
         ...style,
       }}
     >
       {/* Title */}
-      <h2 className="text-title-sm w-fit text-black">Все товары</h2>
+      <h2 className="text-title-sm w-fit text-black animate-slide-in-left">Все товары</h2>
 
       {/* Products Grid */}
       <div
